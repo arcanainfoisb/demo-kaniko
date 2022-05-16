@@ -1,8 +1,5 @@
 pipeline {
 
-  options {
-    ansiColor('xterm')
-  }
 
   agent {
     kubernetes {
@@ -19,14 +16,14 @@ pipeline {
             sh '''
             /kaniko/executor --dockerfile `pwd`/Dockerfile \
                              --context `pwd` \
-                             --destination=justmeandopensource/myweb:${BUILD_NUMBER}
+                             --destination=arcanainfo/kaniko:${BUILD_NUMBER}
             '''
           }
         }
       }
     }
 
-    stage('Deploy App to Kubernetes') {     
+    stage('Deploy App to Kubernetes') {
       steps {
         container('kubectl') {
           withCredentials([file(credentialsId: 'mykubeconfig', variable: 'KUBECONFIG')]) {
@@ -36,6 +33,6 @@ pipeline {
         }
       }
     }
-  
+
   }
 }
