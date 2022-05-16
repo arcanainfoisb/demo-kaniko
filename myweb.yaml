@@ -23,9 +23,9 @@ spec:
         app: myweb
     spec:
       containers:
-      - image: justmeandopensource/myweb:<TAG>
-        imagePullPolicy: Always
-        name: myweb
+        - image: arcanainfo/kaniko:<TAG>
+          imagePullPolicy: Always
+          name: myweb
 
 ---
 apiVersion: v1
@@ -37,10 +37,9 @@ metadata:
   namespace: pipeline-demo
 spec:
   ports:
-  - nodePort: 32223
-    port: 80
-    protocol: TCP
-    targetPort: 80
+    - port: 80
+      protocol: TCP
+      targetPort: 80
   selector:
     app: myweb
-  type: NodePort
+  type: LoadBalancer
