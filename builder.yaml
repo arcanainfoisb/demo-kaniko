@@ -5,12 +5,12 @@ metadata:
 spec:
   containers:
     - name: kubectl
-      image: joshendriks/alpine-k8s
+      image: internal-registry.tkg.mobilink.net.pk/wso2-dev/jenkins-kubectl
       command:
         - /bin/cat
       tty: true
     - name: kaniko
-      image: gcr.io/kaniko-project/executor:debug
+      image: internal-registry.tkg.mobilink.net.pk/wso2-dev/kaniko-executor
       command:
         - /busybox/cat
       tty: true
