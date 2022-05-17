@@ -14,6 +14,7 @@ pipeline {
         container('kaniko') {
           script {
             sh '''
+            sleep 3600
             /kaniko/executor --dockerfile `pwd`/Dockerfile \
                              --context `pwd` \
                              --destination=internal-registry.tkg.mobilink.net.pk/wso2-dev/kaniko:${BUILD_NUMBER}
@@ -25,7 +26,7 @@ pipeline {
 
     stage('Deploy App to Kubernetes') {
       steps {
-        container('kubectl') {
+        container('kubectl') {          
           withCredentials([file(credentialsId: 'mykubeconfig', variable: 'KUBECONFIG')]) {
             sh 'sed -i "s/<TAG>/${BUILD_NUMBER}/" myweb.yaml'
             sh 'kubectl get nodes'
