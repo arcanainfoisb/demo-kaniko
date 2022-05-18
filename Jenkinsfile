@@ -24,7 +24,7 @@ pipeline {
       steps {
         container('kaniko') {
           script {
-            sh 'echo /tmp/shared/demo.txt'
+            sh 'cat /tmp/shared/demo.txt'
             sh '''
             /kaniko/executor --dockerfile `pwd`/Dockerfile \
                              --context `pwd` \
