@@ -8,13 +8,22 @@ pipeline {
   }
 
   stages {
+    
+        stage('Maven build stage') {
+      steps {
+        container('maven') {
+          script {
+            sh 'hostname'
+          }
+        }
+      }
+    }
 
     stage('Kaniko Build & Push Image') {
       steps {
         container('kaniko') {
           script {
             sh '''
-            sleep 3600
             /kaniko/executor --dockerfile `pwd`/Dockerfile \
                              --context `pwd` \
                              --destination=internal-registry.tkg.mobilink.net.pk/wso2-dev/kaniko:${BUILD_NUMBER}
@@ -28,7 +37,6 @@ pipeline {
       steps {
         container('kubectl') {          
           withCredentials([file(credentialsId: 'mykubeconfig', variable: 'KUBECONFIG')]) {
-            sh 'sed -i "s/<TAG>/${BUILD_NUMBER}/" myweb.yaml'
             sh 'kubectl get nodes'
           }
         }
