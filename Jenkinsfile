@@ -14,6 +14,7 @@ pipeline {
         container('maven') {
           script {
             sh 'hostname'
+            sh 'cat "kaniko" > /tmp/shared/demo.txt'
           }
         }
       }
@@ -23,6 +24,7 @@ pipeline {
       steps {
         container('kaniko') {
           script {
+            sh 'echo /tmp/shared/demo.txt'
             sh '''
             /kaniko/executor --dockerfile `pwd`/Dockerfile \
                              --context `pwd` \
