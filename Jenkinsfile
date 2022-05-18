@@ -14,7 +14,7 @@ pipeline {
         container('maven') {
           script {
             sh 'hostname'
-            sh 'cat "kaniko" > /tmp/shared/demo.txt'
+            sh 'echo "kaniko" > /tmp/shared/demo.txt'
           }
         }
       }
