@@ -21,6 +21,8 @@ spec:
           mountPath: /tmp/shared
     - name: maven
       image: internal-registry.tkg.mobilink.net.pk/wso2-dev/maven:3.8.5-openjdk-11
+      command:
+        - /bin/bat
       volumeMounts:
         - name: shared-car-storage
           mountPath: /tmp/shared
