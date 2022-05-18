@@ -17,6 +17,15 @@ spec:
       volumeMounts:
         - name: kaniko-secret
           mountPath: /kaniko/.docker
+        - name: shared-car-storage
+          mountPath: /tmp/shared
+    - name: maven
+      image: internal-registry.tkg.mobilink.net.pk/wso2-dev/maven:3.8.5-openjdk-11
+      volumeMounts:
+        - name: shared-car-storage
+          mountPath: /tmp/shared
+        - name: maven-storage
+          mountPath: /root/.m2
   volumes:
     - name: kaniko-secret
       secret:
@@ -24,3 +33,8 @@ spec:
         items:
           - key: .dockerconfigjson
             path: config.json
+    - name: shared-car-storage
+      emptyDir: {}
+    - name: maven-storage
+      persistentVolumeClaim:
+        claimName: maven-pvc
