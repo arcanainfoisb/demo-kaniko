@@ -37,10 +37,17 @@ pipeline {
 
     stage('Deploy App to Kubernetes') {
       steps {
-        container('kubectl') {          
-          withCredentials([file(credentialsId: 'mykubeconfig', variable: 'KUBECONFIG')]) {
-            sh 'kubectl get nodes'
+        container('kubectl') { 
+          script {
+            sh '''
+            export KUBECTL_VSPHERE_PASSWORD=jInfra@890
+            kubectl vsphere login --server=10.50.49.1 --insecure-skip-tls-verify --vsphere-username tkgs-wso2-dev-herman@vsphere.local --tanzu-kubernetes-cluster-name tkc-dev-wso2-ns001 --tanzu-kubernetes-cluster-namespace tkgs-dev-wso2-ns001
+            kubectl get nodes
+            '''
           }
+//           withCredentials([file(credentialsId: 'mykubeconfig', variable: 'KUBECONFIG')]) {
+//             sh 'kubectl get nodes'
+//           }
         }
       }
     }
