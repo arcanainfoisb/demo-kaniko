@@ -28,7 +28,7 @@ pipeline {
             sh '''
             /kaniko/executor --dockerfile `pwd`/Dockerfile \
                              --context `pwd` \
-                             --destination=internal-registry.tkg.mobilink.net.pk/wso2-dev/kaniko:${BUILD_NUMBER}
+                             --destination=internal-registry.tkg.mobilink.net.pk/wso2-dev/kaniko/jenkins-build:${BUILD_NUMBER}
             '''
           }
         }
