@@ -15,6 +15,7 @@ pipeline {
           script {
             sh 'hostname'
             sh 'echo "kaniko" > /tmp/shared/demo.txt'
+            sh 'mvn dependency:get -Dartifact=mysql:mysql-connector-java:8.0.29'
           }
         }
       }
