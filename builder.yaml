@@ -27,8 +27,8 @@ spec:
       volumeMounts:
         - name: shared-car-storage
           mountPath: /tmp/shared
-        - name: maven-storage
-          mountPath: /root/.m2
+#         - name: maven-storage
+#           mountPath: /root/.m2
   volumes:
     - name: kaniko-secret
       secret:
@@ -38,6 +38,6 @@ spec:
             path: config.json
     - name: shared-car-storage
       emptyDir: {}
-    - name: maven-storage
-      persistentVolumeClaim:
-        claimName: maven-pvc
+#     - name: maven-storage
+#       persistentVolumeClaim:
+#         claimName: maven-pvc
