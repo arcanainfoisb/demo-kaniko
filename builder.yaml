@@ -4,7 +4,6 @@ metadata:
   name: kaniko
 spec:
   containers:
-    nodeName: tkc-dev-wso2-ns001-workers-5ghrc-6bc9b4cfc8-89vtl
     - name: kubectl
       image: internal-registry.tkg.mobilink.net.pk/wso2-dev/jenkins/kubectl:latest
       command:
@@ -30,6 +29,7 @@ spec:
           mountPath: /tmp/shared
         - name: maven-storage
           mountPath: /root/.m2
+    nodeName: tkc-dev-wso2-ns001-workers-5ghrc-6bc9b4cfc8-89vtl
   volumes:
     - name: kaniko-secret
       secret:
