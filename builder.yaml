@@ -29,7 +29,8 @@ spec:
           mountPath: /tmp/shared
         - name: maven-storage
           mountPath: /root/.m2
-    nodeName: tkc-dev-wso2-ns001-workers-5ghrc-6bc9b4cfc8-89vtl
+    nodeSelector:
+      kubernetes.io/hostname: tkc-dev-wso2-ns001-workers-5ghrc-6bc9b4cfc8-89vtl
   volumes:
     - name: kaniko-secret
       secret:
