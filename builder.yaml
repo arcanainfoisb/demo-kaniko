@@ -4,6 +4,7 @@ metadata:
   name: kaniko
 spec:
   containers:
+    nodeName: tkc-dev-wso2-ns001-workers-5ghrc-6bc9b4cfc8-89vtl
     - name: kubectl
       image: internal-registry.tkg.mobilink.net.pk/wso2-dev/jenkins/kubectl:latest
       command:
@@ -27,8 +28,8 @@ spec:
       volumeMounts:
         - name: shared-car-storage
           mountPath: /tmp/shared
-#         - name: maven-storage
-#           mountPath: /root/.m2
+        - name: maven-storage
+          mountPath: /root/.m2
   volumes:
     - name: kaniko-secret
       secret:
@@ -38,6 +39,6 @@ spec:
             path: config.json
     - name: shared-car-storage
       emptyDir: {}
-#     - name: maven-storage
-#       persistentVolumeClaim:
-#         claimName: maven-pvc
+    - name: maven-storage
+      persistentVolumeClaim:
+        claimName: maven-pvc
